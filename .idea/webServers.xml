@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b208fdf1-d82e-431f-9320-6da0f7e20ff7" name="localhost" url="http://localhost/demo_crud_mysql/">
+        <fileTransfer port="0" accessType="LOCAL" />
+      </webServer>
+    </option>
+  </component>
+</project>
