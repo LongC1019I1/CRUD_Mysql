@@ -55,7 +55,7 @@ class UserDB
 
     public function edit ($id,$name,$age, $address, $image)
     {
-        $sql = "UPDATE users SET name = $name , age = $age, address = $address, avatar = $image WHERE id = $id";
+        $sql = "UPDATE users SET name = $name , age = $age, address = $address, image = $image WHERE id = $id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         header("location:../../index.php");
