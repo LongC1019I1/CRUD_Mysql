@@ -54,10 +54,12 @@ $products = $productManager->getList();
                 <th scope="col">ID</th>
                 <th scope="col">Tên hàng</th>
                 <th scope="col">Loại hàng</th>
+                <th scope="col">Giá bán</th>
                 <th scope="col">Số lượng </th>
                 <th scope="col">Ngày tạo</th>
                 <th scope="col">Mô tả</th>
-                <th></th>
+                <th scope="col">Edit & Delete</th>
+
             </tr>
             </thead>
             <tbody>
@@ -66,14 +68,18 @@ $products = $productManager->getList();
                     <td><?php echo $product->getID(); ?></td>
                     <td><?php echo $product->getName(); ?></td>
                     <td><?php echo $product->getType(); ?></td>
+                    <td><?php echo $product->getPrice(); ?></td>
                     <td><?php echo $product->getQuanlity(); ?></td>
+                    <td><?php echo $product->getDate(); ?></td>
+                    <td><?php echo $product->getDescription(); ?></td>
 
                     <td>
-                        <a href="process/user/delete.php?id=<?php echo $product->getID(); ?>">
-                            <button type="button" class="btn btn-outline-danger" onclick="return confirm('bạn có chắc chắn muốn xóa không ?')">Delete</button>
-                        </a>
+
                         <a href="process/user/edit.php?id=<?php echo $product->getID(); ?>">
                             <button type="button" class="btn btn-outline-success">Edit</button>
+                        </a>
+                        <a href="process/user/delete.php?id=<?php echo $product->getID(); ?>">
+                            <button type="button" class="btn btn-outline-danger" onclick="return confirm('bạn có chắc chắn muốn xóa không ?')">Delete</button>
                         </a>
                     </td>
                 </tr>

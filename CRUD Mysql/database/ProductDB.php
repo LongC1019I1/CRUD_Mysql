@@ -24,22 +24,27 @@ class ProductDB
         return $arr;
     }
 
-//    public function create($user)
-//    {
-//        $id = $this->conn->lastInsertID();
-//        $name = $user->getName();
-//        $age = $user->getAge();
-//        $address = $user->getAddress();
-//        $avatar = $user->getAvatar();
-//        $sql = "INSERT INTO users (id, name, age, address, avatar) VALUE (?, ?,?,?,?)";
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->bindParam(1, $id);
-//        $stmt->bindParam(2, $name);
-//        $stmt->bindParam(3, $age);
-//        $stmt->bindParam(4, $address);
-//        $stmt->bindParam(5, $avatar);
-//        $stmt->execute();
-//    }
+    public function create($product)
+    {
+        $id = $this->conn->lastInsertID();
+        $name = $product->getName();
+        $type = $product->getType();
+        $price = $product->getPrice();
+        $quanlity = $product->getQuanlity();
+        $date = $product->getDate();
+        $description = $product->getDescription();
+        $sql = "INSERT INTO products (id, name, type, price, quanlity, date, description) 
+                VALUE (?, ?,?,?,?,?,?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(1, $id);
+        $stmt->bindParam(2, $name);
+        $stmt->bindParam(3, $type);
+        $stmt->bindParam(4, $price);
+        $stmt->bindParam(5, $quanlity);
+        $stmt->bindParam(6, $date);
+        $stmt->bindParam(7, $description);
+        $stmt->execute();
+    }
 //
 //    public function delete($id)
 //    {

@@ -5,7 +5,6 @@ include_once "../../class/ProductManager.php";
 include_once "../../class/Product.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    include_once "uploadImage.php";
     $username = $_POST['username'];
     $age = $_POST['age'];
     $address = $_POST['address'];
@@ -57,12 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h1>ADD USER:</h1>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>User name</label>
-                <input type="text" class="form-control" name="username">
+                <label>Tên</label>
+                <input type="text" class="form-control" name="name">
             </div>
             <div class="form-group col-md-6">
-                <label>Age </label>
-                <input type="number" class="form-control" name="age">
+                <label>Loại hàng </label>
+                <input type="text" class="form-control" name="type">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Loại hàng </label>
+                <input type="text" class="form-control" name="type">
             </div>
         </div>
         <div class="form-group">
