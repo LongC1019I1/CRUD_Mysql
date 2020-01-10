@@ -5,21 +5,18 @@ include_once "../../class/ProductManager.php";
 include_once "../../class/Product.php";
 
 $id = (int)$_GET['id'];
-$userManager = new ProductManager();
-$user = $userManager->getUserID($id);
+$productManager = new ProductManager();
+$product = $productManager->getProductID($id);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    include_once "uploadImage.php";
     $name = $_POST['name'];
-    $age = $_POST['age'];
-    $address = $_POST['address'];
-    if ($_FILES['avatar']['type'] == "") {
-        $avatar = $user->getAvatar();
-    } else {
-        unlink("../../images/" . $user->getAvatar());
-        $avatar = date("H:m:s") . $_FILES['avatar']['name'];
-    }
-    $userManager->edit($id, $name, $age, $address, $avatar);
+    $type = $_POST['type'];
+    $price = $_POST['price'];
+    $quanlity = $_POST['quanlity'];
+    $date = $_POST['date'];
+    $description = $_POST['description'];
+
+    $productManager->edit ($id, $name, $type, $price, $quanlity, $date, $description);
 }
 ?>
 <!doctype html>
@@ -35,11 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         h1 {
             color: #cccccc;
-        }
-
-        img {
-            width: 70px;
-            height: 70px;
         }
     </style>
 </head>
@@ -59,30 +51,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </nav>
-    <form method="post" enctype="multipart/form-data">
-        <h1>EDIT USER:</h1>
+
+    <form method="post" >
+        <h1>ADD USER:</h1>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>User name: </label>
-                <input type="text" class="form-control" name="name" value="<?php echo $user->getName(); ?>">
-            </div>
-            <div class="form-group col-md-6">
-                <label>Age: </label>
-                <input type="number" class="form-control" name="age" value="<?php echo $user->getAge(); ?>">
+                <label>Tên</label>
+                <input type="text" class="form-control" name="name" value="<?php echo $product->getName()?>">
             </div>
         </div>
+
+
         <div class="form-group">
-            <label>Address: </label>
-            <input type="text" class="form-control" placeholder="1234 Main St" name="address"
-                   value="<?php echo $user->getAddress(); ?>">
+            <label for="exampleFormControlSelect1"> Loại hàng</label>
+            <select name="type" class="form-control" id="exampleFormControlSelect1">
+                <option value="<?php echo $product->getType()?>"><?php echo $product->getType()?></option>
+                <option value="Điện thoại">Điện thoại</option>
+                <option value="Điều hòa">Điều hòa</option>
+                <option value="Tủ lạnh">Tủ Lạnh</option>
+
+            </select>
         </div>
-        <div>
-            <label>Avatar: </label>
-            <img src='../../images/<?php echo $user->getAvatar(); ?>'>
-            <input type="file" class="form-control" value="Upload" name="avatar">
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Gia</label>
+                <input type="number" class="form-control" name="price" value="<?php echo $product->getPrice() ?>">
+            </div>
         </div>
-        <button type="submit" class="btn btn-outline-success" onclick="return confirm('bạn có chắc chắn muốn sửa ?')">Edit</button>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>So luong</label>
+                <input type="number" class="form-control" name="quanlity" value="<?php echo $product->getQuanlity() ?>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Ngay nhap</label>
+                <input type="text" class="form-control" name="date" value="<?php echo $product->getDate()?>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Mo ta</label>
+                <input type="text" class="form-control" name="description" value="<?php echo $product->getDescription() ?>">
+            </div>
+        </div>
+
+
+        <br>
+        <button type="submit" class="btn btn-outline-success">Edit</button>
     </form>
+
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

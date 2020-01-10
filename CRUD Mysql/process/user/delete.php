@@ -5,8 +5,6 @@ include_once "../../class/ProductManager.php";
 include_once "../../class/Product.php";
 
 $id = $_GET['id'];
-$userManager = new ProductManager();
-$user = $userManager->getUserID($id);
-unlink("../../images/".$user->getAvatar());
-$userManager->delete($id);
+$productManager = new ProductManager();
+$productManager->delete($id);
 header("location: ../../index.php");

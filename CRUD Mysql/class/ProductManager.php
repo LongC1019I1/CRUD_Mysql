@@ -19,23 +19,23 @@ class ProductManager
         return $this->productDB->getList();
     }
 
-//    public function add($user)
-//    {
-//        $this->productDB->create($user);
-//    }
+    public function add($product)
+    {
+        $this->productDB->create($product);
+    }
 //
-//    public function delete($id)
-//    {
-//        $this->productDB->delete($id);
-//    }
-//
-//    public function edit($id, $name, $age, $address, $avatar)
-//    {
-//        $this->productDB->edit($id, $name, $age, $address, $avatar);
-//    }
-//
-//    public function getUserID($id)
-//    {
-//      return $this->productDB->getValueID($id);
-//    }
+    public function delete($id)
+    {
+        $this->productDB->delete($id);
+    }
+
+    public function edit($id, $name, $type, $price, $quanlity, $date, $description)
+    {
+        $this->productDB->edit($id, $name, $type, $price, $quanlity, $date, $description);
+    }
+
+    public function getProductID($id)
+    {
+      return $this->productDB->getValueID($id);
+    }
 }

@@ -5,17 +5,17 @@ include_once "../../class/ProductManager.php";
 include_once "../../class/Product.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_POST['username'];
-    $age = $_POST['age'];
-    $address = $_POST['address'];
-    if ($_FILES['avatar']['type'] == "") {
-        $avatar = "user.jpeg";
-    } else {
-        $avatar = date("H:m:s").$_FILES['avatar']['name'];
-    }
-    $userManager = new ProductManager();
-    $user = new Product(null, $username, $age, $address, $avatar);
-    $userManager->add($user);
+    $name = $_POST['name'];
+    $type = $_POST['type'];
+    $price = $_POST['price'];
+    $quanlity = $_POST['quanlity'];
+    $date = $_POST['date'];
+    $description = $_POST['description'];
+
+    $productManager = new ProductManager();
+    $product = new Product(null, $name, $type, $price, $quanlity,$date,$description);
+    var_dump($product);
+    $productManager->add($product);
 
 }
 ?>
@@ -53,32 +53,56 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </nav>
     <form method="post" enctype="multipart/form-data">
-        <h1>ADD USER:</h1>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Tên</label>
-                <input type="text" class="form-control" name="name">
-            </div>
-            <div class="form-group col-md-6">
-                <label>Loại hàng </label>
-                <input type="text" class="form-control" name="type">
-            </div>
+                    <h1>ADD USER:</h1>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Tên</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                    </div>
 
-            <div class="form-group col-md-6">
-                <label>Loại hàng </label>
-                <input type="text" class="form-control" name="type">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Address</label>
-            <input type="text" class="form-control" placeholder="1234 Main St" name="address">
-        </div>
-        <div>
-            <label>Avatar</label>
-            <input type="file" class="form-control" value="Upload" name="avatar">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-outline-success">Add</button>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1"> Loại hàng</label>
+                        <select name="type" class="form-control" id="exampleFormControlSelect1">
+                            <option value="Điện thoại">Điện thoại</option>
+                            <option value="Điều hòa">Điều hòa</option>
+                            <option value="Tủ lạnh">Tủ Lạnh</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Gia</label>
+                            <input type="number" class="form-control" name="price">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label>So luong</label>
+                            <input type="number" class="form-control" name="quanlity">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label>Ngay nhap</label>
+                            <input type="text" class="form-control" name="date">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label>Mo ta</label>
+                            <input type="text" class="form-control" name="description">
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <button type="submit" class="btn btn-outline-success">Add</button>
     </form>
 </div>
 

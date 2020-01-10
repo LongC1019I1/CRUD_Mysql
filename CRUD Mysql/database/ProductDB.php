@@ -34,7 +34,7 @@ class ProductDB
         $date = $product->getDate();
         $description = $product->getDescription();
         $sql = "INSERT INTO products (id, name, type, price, quanlity, date, description) 
-                VALUE (?, ?,?,?,?,?,?)";
+                VALUES (?,?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(1, $id);
         $stmt->bindParam(2, $name);
@@ -46,29 +46,35 @@ class ProductDB
         $stmt->execute();
     }
 //
-//    public function delete($id)
-//    {
-//        $sql = "DELETE FROM users WHERE id=$id";
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->execute();
-//    }
-//
-//    public function edit($id, $name, $age, $address, $avatar)
-//    {
-//        $sql = "UPDATE users SET name = '$name', age = $age, address = '$address', avatar = '$avatar' WHERE id=$id";
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->execute();
-//        header("location: ../../index.php");
-//    }
-//
-//    public function getValueID($id)
-//    {
-//        $sql = "SELECT * FROM users WHERE id=$id";
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->execute();
-//        $result = $stmt->fetchAll();
-//        var_dump($result);
-//        return new Product($id, $result[0]['name'], $result[0]['age'], $result[0]['address'], $result[0]['avatar']);
-//    }
+    public function delete($id)
+    {
+        $sql = "DELETE FROM products WHERE id=$id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function edit ($id, $name, $type, $price, $quanlity, $date, $description)
+    {
+
+
+        $sql = "
+                UPDATE products
+                SET name = '$name', type= '$type', price = $price, date = '$date', description='$description'
+                WHERE id = $id;
+";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        header("location: ../../index.php");
+    }
+
+    public function getValueID($id)
+    {
+        $sql = "SELECT * FROM products WHERE id=$id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        var_dump($result);
+        return new Product($id, $result[0]['name'], $result[0]['type'], $result[0]['price'], $result[0]['quanlity'], $result[0]['date'],$result[0]['description'] );
+    }
 
 }
