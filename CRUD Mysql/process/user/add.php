@@ -1,27 +1,23 @@
 <?php
+include_once "../../database/DBconnect.php";
+include_once "../../database/ProductDB.php";
+include_once "../../class/ProductManager.php";
+include_once "../../class/Product.php";
 
-include "../../database/DBConnect.php";
-include "../../database/UserDB.php";
-include "../../class/User.php";
-include "../../class/UserManager.php";
-
-
-$id = (int)$_GET['id'];
-$userManager = new UserManager();
-$user = $userManager->getUserID($id);
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     include_once "uploadImage.php";
-    $name = $_POST['name'];
+    $username = $_POST['username'];
     $age = $_POST['age'];
     $address = $_POST['address'];
-    if ($_FILES['image']['type'] == "") {
-        $image = $user->getImage();
+    if ($_FILES['avatar']['type'] == "") {
+        $avatar = "user.jpeg";
     } else {
-        unlink("../../images/" . $user->getImage());
-        $image = date("H:m:s") . $_FILES['image']['name'];
+        $avatar = date("H:m:s").$_FILES['avatar']['name'];
     }
-    $userManager->edit($id, $name, $age, $address, $image);
+    $userManager = new ProductManager();
+    $user = new Product(null, $username, $age, $address, $avatar);
+    $userManager->add($user);
+
 }
 ?>
 
@@ -38,11 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         h1 {
             color: #cccccc;
-        }
-
-        img {
-            width: 70px;
-            height: 70px;
         }
     </style>
 </head>
@@ -63,28 +54,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </nav>
     <form method="post" enctype="multipart/form-data">
-        <h1>EDIT USER:</h1>
+        <h1>ADD USER:</h1>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>User name: </label>
-                <input type="text" class="form-control" name="name" value="<?php echo $user->getName(); ?>">
+                <label>User name</label>
+                <input type="text" class="form-control" name="username">
             </div>
             <div class="form-group col-md-6">
-                <label>Age: </label>
-                <input type="number" class="form-control" name="age" value="<?php echo $user->getAge(); ?>">
+                <label>Age </label>
+                <input type="number" class="form-control" name="age">
             </div>
         </div>
         <div class="form-group">
-            <label>Address: </label>
-            <input type="text" class="form-control" placeholder="1234 Main St" name="address"
-                   value="<?php echo $user->getAddress(); ?>">
+            <label>Address</label>
+            <input type="text" class="form-control" placeholder="1234 Main St" name="address">
         </div>
         <div>
-            <label>Image: </label>
-            <img src='../../images/<?php echo $user->getImage(); ?>'>
-            <input type="file" class="form-control" value="Upload" name="image">
+            <label>Avatar</label>
+            <input type="file" class="form-control" value="Upload" name="avatar">
         </div>
-        <button type="submit" class="btn btn-outline-success" onclick="return confirm('bạn có chắc chắn muốn sửa ?')">Edit</button>
+        <br>
+        <button type="submit" class="btn btn-outline-success">Add</button>
     </form>
 </div>
 
