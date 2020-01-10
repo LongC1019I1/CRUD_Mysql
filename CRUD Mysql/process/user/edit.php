@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST['date'];
     $description = $_POST['description'];
 
-    $productManager->edit ($id, $name, $type, $price, $quanlity, $date, $description);
+
+   var_dump( $productManager->edit ($id, $name, $type, $price, $quanlity, $date, $description));
 }
 ?>
 <!doctype html>
